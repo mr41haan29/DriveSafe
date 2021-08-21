@@ -9,7 +9,7 @@ from flask import render_template
 import pymongo
 
 # Connect to Atlas
-conn_str = "mongodb+srv://dbUser:dbUser@cluster0.0w6ht.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+conn_str = "mongodb+srv://dbUser:dbUser@cluster0.xqerf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 client = pymongo.MongoClient(conn_str, serverSelectionTimeoutMS=5000)
 
 try:
