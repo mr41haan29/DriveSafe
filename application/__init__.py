@@ -49,7 +49,7 @@ mail = Mail(app)
 # Import each route from all initializations have been finished
 @app.route('/')
 def index():
-    return "Hello World"
+    return render_template("home.html")
 
 @app.route('/waterloo')
 def waterloo(data=None):
