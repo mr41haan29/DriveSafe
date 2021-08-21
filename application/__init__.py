@@ -7,6 +7,8 @@ from itsdangerous import URLSafeTimedSerializer
 from application.settings_secrets import *
 from flask import render_template
 import pymongo
+from bson.json_util import dumps
+from bson.json_util import loads
 
 # Connect to Atlas
 conn_str = "mongodb+srv://dbUser:dbUser@cluster0.xqerf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
@@ -19,7 +21,7 @@ except Exception:
     print("Unable to connect to the server.")
 
 db = client['roads_db']
-col = db['roads_info']
+col = db['road_loc_info']
 
 # Initialize Flask and extensions, such as Flask_SQLAlchemy, Flask_Login, etc.
 app = Flask(__name__)
@@ -51,5 +53,6 @@ def index():
 
 @app.route('/waterloo')
 def waterloo(data=None):
-    data = col.find_one()
-    return render_template("waterloo.html", data=data)
+    doc = col.find({}, {"_id": 0}).sort("SeverityScore").limit(10)
+    l = loads(dumps(doc))
+    return render_template("waterloo.html", data=l)
