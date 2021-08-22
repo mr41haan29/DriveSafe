@@ -38,6 +38,7 @@
 
       function initMap() {
         const toronto = { lat: parseFloat(city[0]), lng: parseFloat(city[1]) };
+        console.log(toronto)
         const map = new google.maps.Map(document.getElementById("map"), {
           zoom: 9,
           center: toronto,
@@ -61,7 +62,6 @@
       }
 
       function eqfeed_callback(map) {
-        console.log(coordArr)
           const heatmapData = [];
           
           for (let i = 0; i < coordArr.length; i++) {
