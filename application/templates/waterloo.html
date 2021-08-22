@@ -29,7 +29,8 @@
       let coordArr = []
 
       function initMap() {
-        const toronto = { lat: parseInt(city[0]), lng: parseInt(city[1]) };
+        const toronto = { lat: parseFloat(city[0]), lng: parseFloat(city[1]) };
+        console.log(toronto)
         const map = new google.maps.Map(document.getElementById("map"), {
           zoom: 9,
           center: toronto,
@@ -53,7 +54,6 @@
       }
 
       function eqfeed_callback(map) {
-        console.log(coordArr)
           const heatmapData = [];
           
           for (let i = 0; i < coordArr.length; i++) {
@@ -80,7 +80,7 @@
     <div id="map"></div>
     <!-- CHANGE API KEY -->
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=visualization&v=weekly&channel=2"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBD8Mefb-n1NRcLSS7_zE_DKUjbIGdMZQ&callback=initMap&libraries=visualization&v=weekly&channel=2"
       async
     ></script>
   </body>
