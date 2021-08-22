@@ -12,17 +12,30 @@
       }
     </style>
     <script>
-      const data = ['{{ data[0] | tojson }}', '{{ data[1] | tojson }}', '{{ data[2] | tojson }}', '{{ data[3] | tojson }}', '{{ data[4] | tojson }}', '{{ data[5] | tojson }}', '{{ data[6] | tojson }}', '{{ data[7] | tojson }}', '{{ data[8] | tojson }}', '{{ data[9] | tojson }}'];
+      // Very janky code
+      const data = ['{{ data[0] | tojson }}', '{{ data[1] | tojson }}', '{{ data[2] | tojson }}', '{{ data[3] | tojson }}', '{{ data[4] | tojson }}', '{{ data[5] | tojson }}', '{{ data[6] | tojson }}', '{{ data[7] | tojson }}', '{{ data[8] | tojson }}', '{{ data[9] | tojson }}', '{{ data[10] | tojson }}', '{{ data[11] | tojson }}', '{{ data[12] | tojson }}', '{{ data[13] | tojson }}', '{{ data[14] | tojson }}', '{{ data[15] | tojson }}', '{{ data[16] | tojson }}', '{{ data[17] | tojson }}', '{{ data[18] | tojson }}', '{{ data[19] | tojson }}', '{{ data[20] | tojson }}'];
+      const baddata = ['{{ badplaces[0] | tojson }}', '{{ badplaces[1] | tojson }}', '{{ badplaces[2] | tojson }}', '{{ badplaces[3] | tojson }}', '{{ badplaces[4] | tojson }}', '{{ badplaces[5] | tojson }}', '{{ badplaces[6] | tojson }}', '{{ badplaces[7] | tojson }}', '{{ badplaces[8] | tojson }}', '{{ badplaces[9] | tojson }}', '{{ badplaces[10] | tojson }}', '{{ badplaces[11] | tojson }}', '{{ badplaces[12] | tojson }}', '{{ badplaces[13] | tojson }}', '{{ badplaces[14] | tojson }}', '{{ badplaces[15] | tojson }}', '{{ badplaces[16] | tojson }}', '{{ badplaces[17] | tojson }}', '{{ badplaces[18] | tojson }}', '{{ badplaces[19] | tojson }}', '{{ badplaces[20] | tojson }}'];
+
       const city = ["{{ lat }}", "{{ lng }}"]
-      console.log(city)
+
       for (let i = 0; i < data.length; i++) {
           data[i] = JSON.parse(data[i])
       }
+      for (let i = 0; i < baddata.length; i++) {
+          baddata[i] = JSON.parse(baddata[i])
+      }
+
+      let coordArr = []
+
       function initMap() {
         const toronto = { lat: parseInt(city[0]), lng: parseInt(city[1]) };
         const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 7,
+          zoom: 9,
           center: toronto,
+        });
+        baddata.forEach((e) => {
+          let posweight = { lat: e['Latitude'], lng: e['Longitude'], weight: e['SeverityScore'] };
+          coordArr.push(posweight)
         });
         data.forEach((e) => {
           let pos = { lat: e['Latitude'], lng: e['Longitude'] };
@@ -34,8 +47,28 @@
             const latlong = mapsMouseEvent.latLng.toJSON()
             window.location.href = `https://www.google.com/maps/search/?api=1&query=${latlong["lat"]},${latlong["lng"]}`;
           });
-        })
-        
+        });
+        eqfeed_callback(map)
+      }
+
+      function eqfeed_callback(map) {
+        console.log(coordArr)
+          const heatmapData = [];
+          
+          for (let i = 0; i < coordArr.length; i++) {
+            const lat = coordArr[i]["lat"];
+            const long = coordArr[i]["lng"];
+            const latLng = new google.maps.LatLng(lat, long);
+            heatmapData.push({
+              location: latLng,
+              weight: coordArr[i]["weight"]
+            });
+          }
+          const heatmap = new google.maps.visualization.HeatmapLayer({
+            data: heatmapData,
+            dissipating: false,
+            map: map,
+          });
       }
     </script>
   </head>
@@ -44,8 +77,9 @@
     <a href="/">Back to home</a>
 
     <div id="map"></div>
+    <!-- CHANGE API KEY -->
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArkUgQdkMZi6JuazGb53N27B2Ndmnhuaw&callback=initMap&libraries=&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=visualization&v=weekly&channel=2"
       async
     ></script>
   </body>
