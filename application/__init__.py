@@ -61,7 +61,7 @@ def index():
 # TESTING
 @app.route("/<cty>")
 def city(cty):
-    return f"<h1>{cty}</h1>"
+    return render_template("city.html", cty=cty)
 #
 
 @app.route('/waterloo')
