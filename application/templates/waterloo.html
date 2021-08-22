@@ -11,7 +11,15 @@
         height: 400px;
         width: 100%;
       }
-
+      a{
+        text-decoration: none;
+        font-size: 23px;
+        color: #22181C;
+      }
+      a:hover{
+    color: #F13030;
+    transition: 200ms;
+}
       a:link{
         text-decoration: none;
       }
@@ -81,15 +89,15 @@
       }
     </script>
   </head>
-  <body>
+  <body style="background-color: #F6E8EA;" >
     <div class="container mt-4">
-      <h1 class="text-center">Drive safe in: {{cty.capitalize()}}</h1>
+      <h2  style="color: #22181C;" class="text-center pb-3 ">Watch out for these risky intersections in {{cty.capitalize()}}</h2>
 
       <div id="map"></div>
       <!-- CHANGE API KEY -->
       <br>
       <div class="redirect text-center">
-        <a href="/" class="display-6">Search again</a>
+        <a href="/">Search again</a>
       </div>
 
     </div>

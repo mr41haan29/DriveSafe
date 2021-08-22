@@ -8,20 +8,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{%block title%}DriveSafe{%endblock%}</title>
+    <style type="text/css">
+      .submit{
+    background-color: #ff4454;
+    border: none;
+    outline: none;
+}
+.submit:hover{
+    background-color: #ff0000;
+}
+    </style>
 </head>
-<body>
+<body style="background-color: #F6E8EA;" >
 
     {%block content%}
-    <div class="container border border-dark mt-4">
-        <h1 class="text-center">DriveSafe</h1>
+    <div style="background-color: #F6E8EA;" class="container mt-4">
+        <h1 style="color: #22181C;" class="text-center pb-4 pt-4">DriveSafe</h1>
+        <h4 style="color: #22181C;" class="text-center pb-2">Want to learn how to drive but not sure what roads are safe?</h4>
+        <h4 style="color: #22181C;" class="text-center pb-5">Avoid having to deal with dangerous road situations with <i>DriveSafe</i></h4>
+
+
 
         <div class="container text-center">
             <form action="#" method="POST">
             <div class="mb-3">
-                <label class="form-label">City</label>
-                <input type="text" name="city" placeholder="Enter city">
+                <label class="form-label" style="color: #22181C;">Enter city:</label>
+                <input type="text" name="city" placeholder="Toronto">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary submit">Submit</button>
             </form>
         </div>
         
