@@ -26,7 +26,7 @@ except Exception:
     print("Unable to connect to the server.")
 
 db = client['roads_db']
-col = db['road_loc_info']
+col = db['ontario_info']
 
 # Connect to geosomething
 
@@ -69,10 +69,12 @@ def index():
 @app.route("/<cty>")
 def city(cty):
     # Mongo markers
-    doc = col.find({}, {"_id": 0}).sort("SeverityScore").limit(10)
+    doc = col.find({"SeverityScore": {"$lt": 0.04}}, {"_id": 0}).sort("SeverityScore", -1).limit(25)
+    badplaces = col.find({"SeverityScore": {"$gt": 0.1, "$lt": 2.0}}, {"_id": 0}).sort("SeverityScore", -1).limit(25)
+    bl = loads(dumps(badplaces))
     l = loads(dumps(doc))
     # Geosomething city location
     results = geocoder.geocode(cty)
     lat = results[0]['geometry']['lat']
     lng = results[0]['geometry']['lng']
-    return render_template("waterloo.html", data=l, lat=lat, lng=lng, cty=cty)
+    return render_template("waterloo.html", data=l, lat=lat, lng=lng, badplaces=bl, cty=cty)
