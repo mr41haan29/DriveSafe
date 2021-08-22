@@ -24,17 +24,18 @@
           zoom: 7,
           center: toronto,
         });
-        // const marker = new google.maps.Marker({
-        //   position: toronto,
-        //   map: map,
-        // });
         data.forEach((e) => {
           let pos = { lat: e['Latitude'], lng: e['Longitude'] };
           const marker = new google.maps.Marker({
             position: pos,
             map: map,
-        });
+          });
+          marker.addListener("click", (mapsMouseEvent) => {
+            const latlong = mapsMouseEvent.latLng.toJSON()
+            window.location.href = `https://www.google.com/maps/search/?api=1&query=${latlong["lat"]},${latlong["lng"]}`;
+          });
         })
+        
       }
     </script>
   </head>
