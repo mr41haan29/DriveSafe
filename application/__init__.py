@@ -1,11 +1,14 @@
 import os
 from flask import Flask
+from flask.helpers import url_for
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from itsdangerous import URLSafeTimedSerializer
+from werkzeug.utils import redirect
 from application.settings_secrets import *
 from flask import render_template
+from flask import request
 import pymongo
 from bson.json_util import dumps
 from bson.json_util import loads
@@ -47,9 +50,19 @@ mail = Mail(app)
 
 
 # Import each route from all initializations have been finished
-@app.route('/')
+@app.route('/', methods=["POST", "GET"])
 def index():
-    return render_template("home.html")
+    if request.method == "POST":
+        city = request.form["city"]
+        return redirect(url_for("city", cty=city))
+    else:
+        return render_template("home.html")
+
+# TESTING
+@app.route("/<cty>")
+def city(cty):
+    return f"<h1>{cty}</h1>"
+#
 
 @app.route('/waterloo')
 def waterloo(data=None):
