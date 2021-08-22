@@ -1,43 +1,7 @@
-# Flask and Bulma Template
-
-This code is a template for the back-end framework Flask and the front-end framework Bulma.
-
-It is based on YouTuber Corey Schafer's Flask series. It also does NOT follow the application factory pattern; in my opinion, it is better this way.
-
-This template is well-organized and is split into folders and files which contain code for specific uses.
-
-## Features
-- Accounts
-- Login
-- Log out
-- Confirmation emails
-- Password reset
-- Simple database models
-- Simple forms
-
-## Screenshots
-
-![](https://raw.githubusercontent.com/vishnupsatish/flask-bulma-template/master/demo/1.png)
-![](https://raw.githubusercontent.com/vishnupsatish/flask-bulma-template/master/demo/2.png)
-![](https://raw.githubusercontent.com/vishnupsatish/flask-bulma-template/master/demo/3.png)
-![](https://raw.githubusercontent.com/vishnupsatish/flask-bulma-template/master/demo/4.png)
-![](https://raw.githubusercontent.com/vishnupsatish/flask-bulma-template/master/demo/5.png)
-
-## Installation
-1. Clone the repository by running ```git clone https://github.com/vishnupsatish/flask-bulma-template```
-2. Change the name of the directory to your project name by running ```mv flask-bulma-template [new_name]```
-3. Go to the directory by running ```cd flask-bulma-template```
-4. Ensure you have Python and virtualenv installed
-5. Create a new virtual environment with the name ```venv``` by running ```virtualenv venv``` or ```python3 -m virtualenv venv```
-6. Install the required Python modules by running ```pip install -r requirements.txt```
-7. Set ```DATABASE_URL``` to ```sqlite:///site.db``` if you want to use SQLite
-    - If you're not using SQLite, set it to your database's URL
-8. Change all "placeholder" values to custom values (Ctrl+F "placeholder", non-case-sensitive, make sure not to change anything in ```application/forms```)
-    - This includes your secret key, email username, email password, etc. for sending confirmation and password reset emails
-9. Run the Flask application by running ```python3 run.py```
-10. In a browser, go to ```http://localhost:5000```
-11. If needed, in ``run.py``, change ```debug=False``` to ```debug=True``` to enable auto-reload
-
-Note: if you are using Windows you may need to replace ```python3``` with ```python```
-
-# flask-bulma-drivingschool
+Driving School
+What Does This Do?
+  This program uses Python, SQL, HTML/CSS, and Javascript to create an application which determines traffic patterns in Ontario, Canada in order to find ideal places for
+  new drivers to practice.
+Credits/Acknowledgements
+  Thank you so much for Geotab for providing us with the data we needed for this project. Also a big thank you to MongoDB for giving us a way to upload those databases 
+  to Github!
