@@ -2,15 +2,23 @@
 <html lang="en">
   <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles1.css">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="styles1.css">
     <title>Drive Safe</title>
     <style type="text/css">
       #map {
         height: 400px;
         width: 100%;
       }
+
+      a:link{
+        text-decoration: none;
+      }
+      a:visited {
+        text-decoration: none;
+      }
+
     </style>
     <script>
       // Very janky code
@@ -29,7 +37,7 @@
       let coordArr = []
 
       function initMap() {
-        const toronto = { lat: parseInt(city[0]), lng: parseInt(city[1]) };
+        const toronto = { lat: parseFloat(city[0]), lng: parseFloat(city[1]) };
         const map = new google.maps.Map(document.getElementById("map"), {
           zoom: 9,
           center: toronto,
@@ -74,13 +82,19 @@
     </script>
   </head>
   <body>
-    <h1>Drive Safe in: {{cty}}</h1>
-    <a href="/">Back to home</a>
+    <div class="container mt-4">
+      <h1 class="text-center">Drive Safe in: {{cty.capitalize()}}</h1>
 
-    <div id="map"></div>
-    <!-- CHANGE API KEY -->
+      <div id="map"></div>
+      <!-- CHANGE API KEY -->
+      <br>
+      <div class="redirect text-center">
+        <a href="/" class="display-6">Back to home</a>
+      </div>
+
+    </div>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=visualization&v=weekly&channel=2"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBD8Mefb-n1NRcLSS7_zE_DKUjbIGdMZQ&callback=initMap&libraries=visualization&v=weekly&channel=2"
       async
     ></script>
   </body>
