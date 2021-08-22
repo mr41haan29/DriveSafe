@@ -1,5 +1,5 @@
-Driving School
-What Does This Do?
+
+What Does The Driving School Program Do?
   This program uses Python, SQL, HTML/CSS, and Javascript to create an application which determines traffic patterns in Ontario, Canada in order to find ideal places for
   new drivers to practice.
 Credits/Acknowledgements
