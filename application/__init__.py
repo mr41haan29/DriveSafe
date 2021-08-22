@@ -12,6 +12,8 @@ from flask import request
 import pymongo
 from bson.json_util import dumps
 from bson.json_util import loads
+from opencage.geocoder import OpenCageGeocode
+
 
 # Connect to Atlas
 conn_str = "mongodb+srv://dbUser:dbUser@cluster0.xqerf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
@@ -25,6 +27,11 @@ except Exception:
 
 db = client['roads_db']
 col = db['road_loc_info']
+
+# Connect to geosomething
+
+key = "b3fcc9d195b548ef9f4cdceb593fc22a"
+geocoder = OpenCageGeocode(key)
 
 # Initialize Flask and extensions, such as Flask_SQLAlchemy, Flask_Login, etc.
 app = Flask(__name__)
@@ -61,8 +68,14 @@ def index():
 # TESTING
 @app.route("/<cty>")
 def city(cty):
-    return f"<h1>{cty}</h1>"
-#
+    # Mongo markers
+    doc = col.find({}, {"_id": 0}).sort("SeverityScore").limit(10)
+    l = loads(dumps(doc))
+    # Geosomething city location
+    results = geocoder.geocode(cty)
+    lat = results[0]['geometry']['lat']
+    lng = results[0]['geometry']['lng']
+    return render_template("waterloo.html", data=l, lat=lat, lng=lng)
 
 @app.route('/waterloo')
 def waterloo(data=None):
