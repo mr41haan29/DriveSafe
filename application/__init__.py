@@ -76,9 +76,3 @@ def city(cty):
     lat = results[0]['geometry']['lat']
     lng = results[0]['geometry']['lng']
     return render_template("waterloo.html", data=l, lat=lat, lng=lng, cty=cty)
-
-@app.route('/waterloo')
-def waterloo(data=None):
-    doc = col.find({}, {"_id": 0}).sort("SeverityScore").limit(10)
-    l = loads(dumps(doc))
-    return render_template("waterloo.html", data=l)
