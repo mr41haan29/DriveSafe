@@ -13,11 +13,13 @@
     </style>
     <script>
       const data = ['{{ data[0] | tojson }}', '{{ data[1] | tojson }}', '{{ data[2] | tojson }}', '{{ data[3] | tojson }}', '{{ data[4] | tojson }}', '{{ data[5] | tojson }}', '{{ data[6] | tojson }}', '{{ data[7] | tojson }}', '{{ data[8] | tojson }}', '{{ data[9] | tojson }}'];
+      const city = ["{{ lat }}", "{{ lng }}"]
+      console.log(city)
       for (let i = 0; i < data.length; i++) {
           data[i] = JSON.parse(data[i])
       }
       function initMap() {
-        const toronto = { lat: 43.6532, lng: -79.3832 };
+        const toronto = { lat: parseInt(city[0]), lng: parseInt(city[1]) };
         const map = new google.maps.Map(document.getElementById("map"), {
           zoom: 7,
           center: toronto,
