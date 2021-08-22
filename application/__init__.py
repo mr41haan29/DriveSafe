@@ -75,7 +75,7 @@ def city(cty):
     results = geocoder.geocode(cty)
     lat = results[0]['geometry']['lat']
     lng = results[0]['geometry']['lng']
-    return render_template("waterloo.html", data=l, lat=lat, lng=lng)
+    return render_template("waterloo.html", data=l, lat=lat, lng=lng, cty=cty)
 
 @app.route('/waterloo')
 def waterloo(data=None):
